@@ -39,7 +39,7 @@ dev = [
 ECOv003_granules = ["*.txt"]
 
 [project.urls]
-"Homepage" = "https://github.com/ECOSTRESS-Collection-3/ECOv003_granules"
+"Homepage" = "https://github.com/ECOSTRESS-Collection-3/ECOv003-granules"
 
 [tool.setuptools.packages.find]
 include = ["ECOv003_granules"]
