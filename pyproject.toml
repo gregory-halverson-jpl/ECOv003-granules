@@ -3,9 +3,9 @@ requires = ["setuptools>=60", "setuptools-scm>=8.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ECOv003_granules"
-version = "1.0.2"
-description = "ECOSTRESS Collection 2 Data Product Granule Encapsulation Classes"
+name = "ECOv003-granules"
+version = "0.1.1"
+description = "ECOSTRESS Collection 3 Data Product Granule Encapsulation Classes"
 readme = "README.md"
 authors = [
     { name = "Gregory H. Halverson", email = "gregory.h.halverson@jpl.nasa.gov" },
@@ -23,19 +23,23 @@ dependencies = [
     "shapely"
 ]
 
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 
 [project.optional-dependencies]
 dev = [
+    "build",
     "pytest>=6.0",
     "pytest-cov",
+    "jupyter",
+    "pytest",
+    "twine"
 ]
 
 [tool.setuptools.package-data]
 ECOv003_granules = ["*.txt"]
 
 [project.urls]
-"Homepage" = "https://github.com/ECOSTRESS-Collection-2/ECOv003_granules"
+"Homepage" = "https://github.com/ECOSTRESS-Collection-3/ECOv003-granules"
 
 [tool.setuptools.packages.find]
 include = ["ECOv003_granules"]
