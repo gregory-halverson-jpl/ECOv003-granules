@@ -1,4 +1,4 @@
-# ECOSTRESS Collection 2 Data Product Granule Encapsulation Classes
+# ECOSTRESS Collection 3 Data Product Granule Encapsulation Classes
 
 [![CI](https://github.com/ECOSTRESS-Collection-3/ECOv003-granules/actions/workflows/ci.yml/badge.svg)](https://github.com/ECOSTRESS-Collection-3/ECOv003-granules/actions/workflows/ci.yml)
 
