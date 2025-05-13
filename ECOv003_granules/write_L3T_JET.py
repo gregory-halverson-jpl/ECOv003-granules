@@ -26,14 +26,15 @@ def write_L3T_JET(
             time_UTC: datetime,
             build: str,
             product_counter: int,
-            LE_STIC: Raster,
             LE_PTJPLSM: Raster,
-            LE_BESS: Raster,
-            LE_PMJPL: Raster,
+            ET_PTJPLSM: Raster,
+            ET_STICJPL: Raster,
+            ET_BESSJPL: Raster,
+            ET_PMJPL: Raster,
             ET_daily_kg: Raster,
             ETinstUncertainty: Raster,
             PTJPLSMcanopy: Raster,
-            STICcanopy: Raster,
+            STICJPLcanopy: Raster,
             PTJPLSMsoil: Raster,
             PTJPLSMinterception: Raster,
             water_mask: Raster,
@@ -77,9 +78,9 @@ def write_L3T_JET(
         PTJPLSMcanopy = rt.where(water_mask, np.nan, PTJPLSMcanopy)
         PTJPLSMcanopy = PTJPLSMcanopy.astype(np.float32)
         
-        STICcanopy.nodata = np.nan
-        STICcanopy = rt.where(water_mask, np.nan, STICcanopy)
-        STICcanopy = STICcanopy.astype(np.float32)
+        STICJPLcanopy.nodata = np.nan
+        STICJPLcanopy = rt.where(water_mask, np.nan, STICJPLcanopy)
+        STICJPLcanopy = STICJPLcanopy.astype(np.float32)
         
         PTJPLSMsoil.nodata = np.nan
         PTJPLSMsoil = rt.where(water_mask, np.nan, PTJPLSMsoil)
@@ -92,14 +93,15 @@ def write_L3T_JET(
         water_mask = water_mask.astype(np.uint8)
         cloud_mask = cloud_mask.astype(np.uint8)
 
-        L3T_JET_granule.add_layer("STICinst", LE_STIC, cmap=ET_COLORMAP)
         L3T_JET_granule.add_layer("PTJPLSMinst", LE_PTJPLSM, cmap=ET_COLORMAP)
-        L3T_JET_granule.add_layer("BESSinst", LE_BESS, cmap=ET_COLORMAP)
-        L3T_JET_granule.add_layer("MOD16inst", LE_PMJPL, cmap=ET_COLORMAP)
+        L3T_JET_granule.add_layer("PTJPLSMdaily", ET_PTJPLSM, cmap=ET_COLORMAP)
+        L3T_JET_granule.add_layer("STICJPLdaily", ET_STICJPL, cmap=ET_COLORMAP)
+        L3T_JET_granule.add_layer("BESSJPLdaily", ET_BESSJPL, cmap=ET_COLORMAP)
+        L3T_JET_granule.add_layer("PMJPLdaily", LE_PMJPL, cmap=ET_COLORMAP)
         L3T_JET_granule.add_layer("ETdaily", ET_daily_kg, cmap=ET_COLORMAP)
         L3T_JET_granule.add_layer("ETinstUncertainty", ETinstUncertainty, cmap="jet")
         L3T_JET_granule.add_layer("PTJPLSMcanopy", PTJPLSMcanopy, cmap=ET_COLORMAP)
-        L3T_JET_granule.add_layer("STICcanopy", STICcanopy, cmap=ET_COLORMAP)
+        L3T_JET_granule.add_layer("STICJPLcanopy", STICJPLcanopy, cmap=ET_COLORMAP)
         L3T_JET_granule.add_layer("PTJPLSMsoil", PTJPLSMsoil, cmap=ET_COLORMAP)
         L3T_JET_granule.add_layer("PTJPLSMinterception", PTJPLSMinterception, cmap=ET_COLORMAP)
         L3T_JET_granule.add_layer("water", water_mask, cmap=WATER_COLORMAP)
