@@ -50,21 +50,25 @@ def write_L3T_JET(
             process_count=product_counter
         )
 
-        LE_STIC.nodata = np.nan
-        LE_STIC = rt.where(water_mask, np.nan, LE_STIC)
-        LE_STIC = LE_STIC.astype(np.float32)
-        
         LE_PTJPLSM.nodata = np.nan
         LE_PTJPLSM = rt.where(water_mask, np.nan, LE_PTJPLSM)
         LE_PTJPLSM = LE_PTJPLSM.astype(np.float32)
+
+        ET_PTJPLSM.nodata = np.nan
+        ET_PTJPLSM = rt.where(water_mask, np.nan, ET_PTJPLSM)
+        ET_PTJPLSM = ET_PTJPLSM.astype(np.float32)
+
+        ET_STICJPL.nodata = np.nan
+        ET_STICJPL = rt.where(water_mask, np.nan, ET_STICJPL)
+        ET_STICJPL = ET_STICJPL.astype(np.float32)
         
-        LE_BESS.nodata = np.nan
-        LE_BESS = rt.where(water_mask, np.nan, LE_BESS)
-        LE_BESS = LE_BESS.astype(np.float32)
+        ET_BESSJPL.nodata = np.nan
+        ET_BESSJPL = rt.where(water_mask, np.nan, ET_BESSJPL)
+        ET_BESSJPL = ET_BESSJPL.astype(np.float32)
         
-        LE_PMJPL.nodata = np.nan
-        LE_PMJPL = rt.where(water_mask, np.nan, LE_PMJPL)
-        LE_PMJPL = LE_PMJPL.astype(np.float32)
+        ET_PMJPL.nodata = np.nan
+        ET_PMJPL = rt.where(water_mask, np.nan, ET_PMJPL)
+        ET_PMJPL = ET_PMJPL.astype(np.float32)
         
         ET_daily_kg.nodata = np.nan
         ET_daily_kg = rt.where(water_mask, np.nan, ET_daily_kg)
@@ -97,7 +101,7 @@ def write_L3T_JET(
         L3T_JET_granule.add_layer("PTJPLSMdaily", ET_PTJPLSM, cmap=ET_COLORMAP)
         L3T_JET_granule.add_layer("STICJPLdaily", ET_STICJPL, cmap=ET_COLORMAP)
         L3T_JET_granule.add_layer("BESSJPLdaily", ET_BESSJPL, cmap=ET_COLORMAP)
-        L3T_JET_granule.add_layer("PMJPLdaily", LE_PMJPL, cmap=ET_COLORMAP)
+        L3T_JET_granule.add_layer("PMJPLdaily", ET_PMJPL, cmap=ET_COLORMAP)
         L3T_JET_granule.add_layer("ETdaily", ET_daily_kg, cmap=ET_COLORMAP)
         L3T_JET_granule.add_layer("ETinstUncertainty", ETinstUncertainty, cmap="jet")
         L3T_JET_granule.add_layer("PTJPLSMcanopy", PTJPLSMcanopy, cmap=ET_COLORMAP)
@@ -107,7 +111,7 @@ def write_L3T_JET(
         L3T_JET_granule.add_layer("water", water_mask, cmap=WATER_COLORMAP)
         L3T_JET_granule.add_layer("cloud", cloud_mask, cmap=CLOUD_COLORMAP)
 
-        percent_good_quality = 100 * (1 - np.count_nonzero(np.isnan(LE_PTJPLSM)) / LE_PTJPLSM.size)
+        percent_good_quality = 100 * (1 - np.count_nonzero(np.isnan(ET_PTJPLSM)) / ET_PTJPLSM.size)
         metadata["ProductMetadata"]["QAPercentGoodQuality"] = percent_good_quality
 
         metadata["StandardMetadata"]["LocalGranuleID"] = basename(L3T_JET_zip_filename)
