@@ -8,6 +8,9 @@ L3T_SM_LONG_NAME = "ECOSTRESS Tiled Downscaled Soil Moisture Instantaneous L3 Gl
 L3T_MET_SHORT_NAME = "ECO_L3T_MET"
 L3T_MET_LONG_NAME = "ECOSTRESS Tiled Downscaled Meteorology Instantaneous L3 Global 70 m"
 
+L3T_ETAUX_SHORT_NAME = "ECO_L3T_ETAUX"
+L3T_ETAUX_LONG_NAME = "ECOSTRESS Tiled Evapotranspiration Auxiliary Instantaneous L3 Global 70 m"
+
 L3T_JET_SHORT_NAME = "ECO_L3T_JET"
 L3T_JET_LONG_NAME = "ECOSTRESS Tiled Evapotranspiration Ensemble Instantaneous and Daytime L3 Global 70 m"
 
