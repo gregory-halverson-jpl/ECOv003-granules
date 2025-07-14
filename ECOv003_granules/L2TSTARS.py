@@ -13,8 +13,12 @@ PREVIEW_CMAP = NDVI_COLORMAP
 VARIABLE_CMAPS = {
     "NDVI": NDVI_COLORMAP,
     "NDVI-UQ": "jet",
+    "NDVI-bias": "viridis",
+    "NDVI-UQ-bias": "viridis",
     "albedo": ALBEDO_COLORMAP,
-    "albedo-UQ": "jet"
+    "albedo-UQ": "jet",
+    "albedo-bias": "viridis",
+    "albedo-UQ-bias": "viridis",
 }
 
 class L2STARSGranule(ECOSTRESSGranule):
@@ -29,8 +33,12 @@ class L2STARSGranule(ECOSTRESSGranule):
 
         self._NDVI = None
         self._NDVI_UQ = None
+        self._NDVI_bias = None
+        self._NDVI_UQ_bias = None
         self._albedo = None
         self._albedo_UQ = None
+        self._albedo_bias = None
+        self._albedo_UQ_bias = None
 
     @property
     def NDVI(self):
@@ -48,6 +56,20 @@ class L2STARSGranule(ECOSTRESSGranule):
         return self._NDVI_UQ
 
     @property
+    def NDVI_bias(self):
+        if self._NDVI_bias is None:
+            self._NDVI_bias = self.variable("NDVI-bias")
+
+        return self._NDVI_bias
+
+    @property
+    def NDVI_UQ_bias(self):
+        if self._NDVI_UQ_bias is None:
+            self._NDVI_UQ_bias = self.variable("NDVI-UQ-bias")
+
+        return self._NDVI_UQ_bias
+
+    @property
     def albedo(self):
         if self._albedo is None:
             self._albedo = self.variable("albedo")
@@ -61,6 +83,20 @@ class L2STARSGranule(ECOSTRESSGranule):
             self._albedo_UQ = self.variable("albedo-UQ")
 
         return self._albedo_UQ
+
+    @property
+    def albedo_bias(self):
+        if self._albedo_bias is None:
+            self._albedo_bias = self.variable("albedo-bias")
+
+        return self._albedo_bias
+
+    @property
+    def albedo_UQ_bias(self):
+        if self._albedo_UQ_bias is None:
+            self._albedo_UQ_bias = self.variable("albedo-UQ-bias")
+
+        return self._albedo_UQ_bias
 
     @property
     def orbit(self):
