@@ -114,6 +114,7 @@ def write_L3T_JET(
         percent_good_quality = 100 * (1 - np.count_nonzero(np.isnan(ET_PTJPLSM)) / ET_PTJPLSM.size)
         metadata["ProductMetadata"]["QAPercentGoodQuality"] = percent_good_quality
 
+        metadata["StandardMetadata"]["BuildID"] = build
         metadata["StandardMetadata"]["LocalGranuleID"] = basename(L3T_JET_zip_filename)
         metadata["StandardMetadata"]["SISName"] = "Level 3/4 JET Product Specification Document"
 

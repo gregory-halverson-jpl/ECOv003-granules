@@ -54,6 +54,7 @@ def write_L3T_SM(
     percent_good_quality = 100 * (1 - np.count_nonzero(np.isnan(SM)) / SM.size)
     metadata["ProductMetadata"]["QAPercentGoodQuality"] = percent_good_quality
 
+    metadata["StandardMetadata"]["BuildID"] = build
     metadata["StandardMetadata"]["LocalGranuleID"] = basename(L3T_SM_zip_filename)
     metadata["StandardMetadata"]["SISName"] = "Level 3/4 PT-JPL Product Specification Document"
 
