@@ -58,6 +58,7 @@ def write_L4T_ESI(
 
     percent_good_quality = 100 * (1 - np.count_nonzero(np.isnan(ESI)) / ESI.size)
     metadata["ProductMetadata"]["QAPercentGoodQuality"] = percent_good_quality
+    metadata["StandardMetadata"]["BuildID"] = build
     metadata["StandardMetadata"]["LocalGranuleID"] = basename(L4T_ESI_zip_filename)
 
     short_name = L4T_ESI_SHORT_NAME
