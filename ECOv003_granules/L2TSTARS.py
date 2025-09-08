@@ -154,7 +154,6 @@ class L2TSTARS(ECOSTRESSTiledGranule, L2STARSGranule):
             scene: int,
             tile: str,
             time_UTC: Union[datetime, str],
-            build: str,
             process_count: int):
         if product_name is None:
             raise ValueError("invalid product name")
@@ -171,15 +170,12 @@ class L2TSTARS(ECOSTRESSTiledGranule, L2STARSGranule):
         if time_UTC is None:
             raise ValueError("invalid time")
 
-        if build is None:
-            raise ValueError("invalid build")
-
         if process_count is None:
             raise ValueError("invalid process count")
 
         if isinstance(time_UTC, str):
             time_UTC = parser.parse(time_UTC)
 
-        granule_name = f"ECOv003_{product_name}_{tile}_{time_UTC:%Y%m%dT%H%M%S}_{build}_{process_count:02d}"
+        granule_name = f"ECOv003_{product_name}_{tile}_{time_UTC:%Y%m%dT%H%M%S}_{process_count:02d}"
 
         return granule_name

@@ -84,7 +84,6 @@ class ECOSTRESSTiledGranule(ECOSTRESSGranule):
                 scene=scene,
                 tile=tile,
                 time_UTC=time_UTC,
-                build=build,
                 process_count=process_count
             )
 
@@ -194,7 +193,6 @@ class ECOSTRESSTiledGranule(ECOSTRESSGranule):
             scene: int,
             tile: str,
             time_UTC: Union[datetime, str],
-            build: str,
             process_count: int,
             collection: str = "003"):
         if product_name is None:
@@ -212,16 +210,13 @@ class ECOSTRESSTiledGranule(ECOSTRESSGranule):
         if time_UTC is None:
             raise ValueError("invalid time")
 
-        if build is None:
-            raise ValueError("invalid build")
-
         if process_count is None:
             raise ValueError("invalid process count")
 
         if isinstance(time_UTC, str):
             time_UTC = parser.parse(time_UTC)
 
-        granule_name = f"ECOv{collection}_{product_name}_{orbit:05d}_{scene:03d}_{tile}_{time_UTC:%Y%m%dT%H%M%S}_{build}_{process_count:02d}"
+        granule_name = f"ECOv{collection}_{product_name}_{orbit:05d}_{scene:03d}_{tile}_{time_UTC:%Y%m%dT%H%M%S}_{process_count:02d}"
 
         return granule_name
 
@@ -459,7 +454,7 @@ class ECOSTRESSTiledGranule(ECOSTRESSGranule):
         if self._build is not None:
             return self._build
         else:
-            return self.granule_name.split('_')[-2]
+            return self.standard_metadata["BuildID"]
 
     @property
     def process_count(self) -> int:
@@ -483,7 +478,6 @@ class ECOSTRESSTiledGranule(ECOSTRESSGranule):
                 scene=self.scene,
                 tile=self.tile,
                 time_UTC=self.time_UTC,
-                build=self.build,
                 process_count=self.process_count
             )
 
