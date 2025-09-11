@@ -149,12 +149,13 @@ class L2TSTARS(ECOSTRESSTiledGranule, L2STARSGranule):
     @classmethod
     def generate_granule_name(
             cls,
-            product_name: str,
             orbit: int,
             scene: int,
             tile: str,
             time_UTC: Union[datetime, str],
-            process_count: int):
+            process_count: int,
+            collection = "003"):
+        product_name = cls._PRODUCT_NAME
         if product_name is None:
             raise ValueError("invalid product name")
 
@@ -176,6 +177,6 @@ class L2TSTARS(ECOSTRESSTiledGranule, L2STARSGranule):
         if isinstance(time_UTC, str):
             time_UTC = parser.parse(time_UTC)
 
-        granule_name = f"ECOv003_{product_name}_{tile}_{time_UTC:%Y%m%dT%H%M%S}_{process_count:02d}"
+        granule_name = f"ECOv{collection}_{product_name}_{tile}_{time_UTC:%Y%m%dT%H%M%S}_{process_count:02d}"
 
         return granule_name

@@ -50,7 +50,6 @@ class ECOSTRESSTiledGranule(ECOSTRESSGranule):
             build: str = None,
             process_count: int = None,
             *args,
-            product_name: str = None,
             containing_directory: str = None,
             compression: str = None,
             layer_preview_quality: int = None,
@@ -68,18 +67,11 @@ class ECOSTRESSTiledGranule(ECOSTRESSGranule):
             **kwargs
         )
 
-        if product_name is None:
-            product_name = self._PRODUCT_NAME
-
-        if product_name is None:
-            raise ValueError("product name not given for ECOSTRESS tiled product")
-
         if product_location is None:
             if isinstance(time_UTC, str):
                 time_UTC = parser.parse(time_UTC)
 
             granule_name = self.generate_granule_name(
-                product_name=product_name,
                 orbit=orbit,
                 scene=scene,
                 tile=tile,
@@ -188,13 +180,13 @@ class ECOSTRESSTiledGranule(ECOSTRESSGranule):
     @classmethod
     def generate_granule_name(
             cls,
-            product_name: str,
             orbit: int,
             scene: int,
             tile: str,
             time_UTC: Union[datetime, str],
             process_count: int,
             collection: str = "003"):
+        product_name = cls._PRODUCT_NAME
         if product_name is None:
             raise ValueError("invalid product name")
 
