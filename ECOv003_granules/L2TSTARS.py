@@ -149,12 +149,12 @@ class L2TSTARS(ECOSTRESSTiledGranule, L2STARSGranule):
     @classmethod
     def generate_granule_name(
             cls,
-            product_name: str,
             orbit: int,
             scene: int,
             tile: str,
             time_UTC: Union[datetime, str],
             process_count: int):
+        product_name = cls._PRODUCT_NAME
         if product_name is None:
             raise ValueError("invalid product name")
 
