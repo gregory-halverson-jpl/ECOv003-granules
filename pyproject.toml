@@ -35,9 +35,6 @@ dev = [
     "twine"
 ]
 
-[tool.setuptools.package-data]
-ECOv003_granules = ["*.txt"]
-
 [project.urls]
 "Homepage" = "https://github.com/ECOSTRESS-Collection-3/ECOv003-granules"
 
