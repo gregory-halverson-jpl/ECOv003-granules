@@ -44,19 +44,19 @@ def write_L3T_ETAUX(
     )
 
     Ta_C.nodata = np.nan
-    Ta_C = rt.where(water_mask, np.nan, Ta_C)
+    # Ta_C = rt.where(water_mask, np.nan, Ta_C)
     Ta_C = Ta_C.astype(np.float32)
 
     RH.nodata = np.nan
-    RH = rt.where(water_mask, np.nan, RH)
+    # RH = rt.where(water_mask, np.nan, RH)
     RH = RH.astype(np.float32)
 
     Rn.nodata = np.nan
-    Rn = rt.where(water_mask, np.nan, Rn)
+    # Rn = rt.where(water_mask, np.nan, Rn)
     Rn = Rn.astype(np.float32)
 
     Rg.nodata = np.nan
-    Rg = rt.where(water_mask, np.nan, Rg)
+    # Rg = rt.where(water_mask, np.nan, Rg)
     Rg = Rg.astype(np.float32)
 
     SM.nodata = np.nan
