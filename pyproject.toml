@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ECOv003-granules"
-version = "1.8.0"
+version = "1.9.0"
 description = "ECOSTRESS Collection 3 Data Product Granule Encapsulation Classes"
 readme = "README.md"
 authors = [

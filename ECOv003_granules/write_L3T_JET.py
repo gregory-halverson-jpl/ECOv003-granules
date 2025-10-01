@@ -71,7 +71,7 @@ def write_L3T_JET(
         ET_PMJPL = ET_PMJPL.astype(np.float32)
         
         ET_daily_kg.nodata = np.nan
-        ET_daily_kg = rt.where(water_mask, np.nan, ET_daily_kg)
+        # ET_daily_kg = rt.where(water_mask, np.nan, ET_daily_kg)
         ET_daily_kg = ET_daily_kg.astype(np.float32)
         
         ETinstUncertainty.nodata = np.nan
