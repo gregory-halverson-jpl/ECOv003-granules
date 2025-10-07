@@ -1,6 +1,6 @@
 # ECOSTRESS Level-3 Evapotranspiration (JET) Data Products User Guide
 
-**ECOsystem Spaceborne Thermal Radiometer Experiment on Space Station (SBG)**
+**ECOsystem Spaceborne Thermal Radiometer Experiment on Space Station (ECOSTRESS)**
 
 **Version 3**  
 **October 7, 2025**
@@ -29,7 +29,7 @@ California Institute of Technology
 
 ---
 
-*© 2024 California Institute of Technology. Government sponsorship acknowledged.*
+*© 2025 California Institute of Technology. Government sponsorship acknowledged.*
 
 **National Aeronautics and Space Administration**  
 Jet Propulsion Laboratory  
@@ -115,16 +115,16 @@ the following:
 ## Table of Contents
 
 1. [Introduction](#introduction)
-   1.1. [Cloud-Optimized GeoTIFF Orbit/Scene/Tile Products](#cloud-optimized-geotiff-orbitscenetile-products)
-   1.2. [Quality Flags](#quality-flags)
-   1.3. [Product Availability](#product-availability)
-2. [L2T STARS NDVI and Albedo Product](#l2t-stars-ndvi-and-albedo-product)
+   - [Cloud-Optimized GeoTIFF Orbit/Scene/Tile Products](#cloud-optimized-geotiff-orbitscenetile-products)
+   - [Quality Flags](#quality-flags)
+   - [Product Availability](#product-availability)
+2. [L2T STARS NDVI & Albedo Product](#l2t-stars-ndvi-and-albedo-product)
 3. [L3T ETAUX Ecosystem Auxiliary Inputs Product](#l3t-etaux-ecosystem-auxiliary-inputs-product)
-   3.1. [Downscaled Meteorology](#downscaled-meteorology)
-   3.2. [Downscaled Soil Moisture](#downscaled-soil-moisture)
-   3.3. [Surface Energy Balance](#surface-energy-balance)
+   - [Downscaled Meteorology](#downscaled-meteorology)
+   - [Downscaled Soil Moisture](#downscaled-soil-moisture)
+   - [Surface Energy Balance](#surface-energy-balance)
 4. [L3T JET Evapotranspiration Product](#l3t-jet-evapotranspiration-product)
-5. [L4T ESI and WUE Products](#l4t-esi-and-wue-products)
+5. [L4T ESI & WUE Products](#l4t-esi-and-wue-products)
 6. [Standard Metadata](#standard-metadata)
 7. [Acknowledgements](#acknowledgements)
 8. [Bibliography](#bibliography)
