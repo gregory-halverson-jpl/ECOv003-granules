@@ -10,7 +10,7 @@ from rasters import Raster
 import rasters as rt
 
 from .constants import L3T_ETAUX_SHORT_NAME, L3T_ETAUX_LONG_NAME
-from .colors import RH_COLORMAP, WATER_COLORMAP, CLOUD_COLORMAP
+from .colors import RH_COLORMAP, SM_COLORMAP, WATER_COLORMAP, CLOUD_COLORMAP
 from .L3TETAUX import L3TETAUX
 
 logger = logging.getLogger(__name__)
@@ -70,6 +70,7 @@ def write_L3T_ETAUX(
     L3T_ETAUX_granule.add_layer("RH", RH, cmap=RH_COLORMAP)
     L3T_ETAUX_granule.add_layer("Rn", Rn, cmap="jet")
     L3T_ETAUX_granule.add_layer("Rg", Rg, cmap="jet")
+    L3T_ETAUX_granule.add_layer("SM", SM, cmap=SM_COLORMAP)
     L3T_ETAUX_granule.add_layer("water", water_mask, cmap=WATER_COLORMAP)
     L3T_ETAUX_granule.add_layer("cloud", cloud_mask, cmap=CLOUD_COLORMAP)
 
