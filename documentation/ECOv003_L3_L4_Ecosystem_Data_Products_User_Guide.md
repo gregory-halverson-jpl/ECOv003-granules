@@ -124,11 +124,10 @@ the following:
    3.2. [Downscaled Soil Moisture](#downscaled-soil-moisture)
    3.3. [Surface Energy Balance](#surface-energy-balance)
 4. [L3T JET Evapotranspiration Product](#l3t-jet-evapotranspiration-product)
-5. [L4T ESI & WUE Products](#l4t-esi-and-wue-products)
-6. [Low Latency Product](#l3t-etll-low-latency-evapotranspiration-product)
-7. [Standard Metadata](#standard-metadata)
-8. [Acknowledgements](#acknowledgements)
-9. [Bibliography](#bibliography)
+5. [L4T ESI and WUE Products](#l4t-esi-and-wue-products)
+6. [Standard Metadata](#standard-metadata)
+7. [Acknowledgements](#acknowledgements)
+8. [Bibliography](#bibliography)
 
 ### List of Tables
 
@@ -138,9 +137,8 @@ the following:
 - Table 4: Listing of the L3T JET data layers
 - Table 5: Listing of the L4T ESI data layers
 - Table 6: Listing of the L4T WUE data layers
-- Table 7: Listing of the L3T ETLL data layers
-- Table 8: StandardMetadata fields in L2T/L3T/L4T products
-- Table 9: ProductMetadata fields in L2T/L3T/L4T products
+- Table 7: StandardMetadata fields in L2T/L3T/L4T products
+- Table 8: ProductMetadata fields in L2T/L3T/L4T products
 
 # Introduction
 
@@ -378,22 +376,6 @@ WUE product as listed in Table 6.
 
 **Table 6.** Listing of the L4T WUE data layers.
 
-# L3T ETLL Low Latency Evapotranspiration Product
-
-In addition to the standard product, there will also be a low latency
-(\< 24 hour) ET product, produced with low latency L2 LSTE, and
-ancillary inputs (NDVI) from STARS from 3 days prior. The low latency ET
-product involves a daily ET estimate in millimeters per day, as listed
-in Table 7.
-
-| **Name** | **Description** | **Type** | **Units** | **Fill Value** | **No Data Value** | **Valid Min** | **Valid Max** | **Scale Factor** | **Size** |
-|---|---|---|---|---|---|---|---|---|---|
-| ETdaily | Evapotranspiration Daily | float32 | mm day⁻¹ | NaN | NaN | N/A | N/A | N/A | 12.06 mb |
-| cloud | Cloud mask | uint8 | Mask | 255 | N/A | 0 | 1 | N/A | 3.24 mb |
-| water | Water mask | uint8 | Mask | 255 | N/A | 0 | 1 | N/A | 3.24 mb |
-
-**Table 7.** Listing of the L3T ETLL data layers.
-
 # Standard Metadata
 
 Each SBG product bundle contains two sets of product metadata:
@@ -403,8 +385,8 @@ Each SBG product bundle contains two sets of product metadata:
 - StandardMetadata
 
 Each product contains a custom set of ProductMetadata attributes, as
-listed in Table 8. The StandardMetadata attributes are consistent across
-products at each orbit/scene, as listed in Table 9.
+listed in Table 7. The StandardMetadata attributes are consistent across
+products at each orbit/scene, as listed in Table 8.
 
 | **Name** | **Type** |
 |---|---|
@@ -455,7 +437,7 @@ products at each orbit/scene, as listed in Table 9.
 | StopOrbitNumber | string |
 | WestBoundingCoordinate | float |
 
-**Table 8.** Name and type of metadata fields contained in the common StandardMetadata group in each L2T/L3T/L4T product.
+**Table 7.** Name and type of metadata fields contained in the common StandardMetadata group in each L2T/L3T/L4T product.
 
 | **Name** | **Type** |
 |---|---|
@@ -466,7 +448,7 @@ products at each orbit/scene, as listed in Table 9.
 | QAPercentGoodQuality | float |
 | AuxiliaryNWP | string |
 
-**Table 9.** Name and type of metadata fields contained in the common ProductMetadata group in each L2T/L3T/L4T product.
+**Table 8.** Name and type of metadata fields contained in the common ProductMetadata group in each L2T/L3T/L4T product.
 
 # Acknowledgements
 
