@@ -260,7 +260,7 @@ product listed in Table .
 
 The surface energy balance processing for ECOSTRESS begins with an
 artificial neural network (ANN) implementation of the Forest Light
-Environmental Simulator (FLiES) radiative transfer algorithm, following
+Environmental Simulator (FLiES) radiative transfer algorithm (Kobayashi & Iwabuchi, 2008), following
 the workflow established by Dr. Hideki Kobayashi and Dr. Youngryel Ryu.
 GEOS-5 FP provides sub-daily Cloud Optical Thickness (COT) in the
 tavg1_2d_rad_Nx product and Aerosol Optical Thickness (AOT) from
@@ -269,9 +269,9 @@ through the ANN implementation of FLiES to estimate incoming shortwave
 radiation (Rg), bias-corrected to Rg from the GEOS-5 FP tavg1_2d_rad_Nx
 product.
 
-The Breathing Earth System Simulator (BESS) algorithm, contributed by
+The Breathing Earth System Simulator (BESS-JPL) algorithm (Ryu et al., 2011; Jiang & Ryu, 2016), contributed by
 Dr. Youngryel Ryu, iteratively calculates net radiation (Rn), ET, and
-Gross Primary Production (GPP) estimates. The BESS Rn is used as the Rn
+Gross Primary Production (GPP) estimates. The BESS-JPL Rn is used as the Rn
 input to the remaining ET models and is recorded in the L3T ETAUX product
 listed in Table 3.
 
@@ -281,7 +281,7 @@ Following design of the L3T JET product from ECOSTRESS Collection 2, the
 Collection 3 L3T JET product uses an ensemble of evapotranspiration
 models to produce a daily evapotranspiration estimate.
 
-The PT-JPL-SM model, developed by Dr. Adam Purdy and Dr. Joshua Fisher
+The PT-JPL-SM model (Purdy et al., 2018), developed by Dr. Adam Purdy and Dr. Joshua Fisher
 was designed as a SM-sensitive evapotranspiration product for the Soil
 Moisture Active-Passive (SMAP) mission, and then reimplemented as an ET
 model in the ECOSTRESS and SBG processing chain, using the downscaled
@@ -292,29 +292,29 @@ evaporation using the Priestley-Taylor formula with a set of
 constraints. These three partitions are combined into total latent heat
 flux in watts per square meter for the ensemble estimate.
 
-The Surface Temperature Initiated Closure (STIC) model, contributed by
+The Surface Temperature Initiated Closure (STIC-JPL) model (Mallick et al., 2018), contributed by
 Dr. Kaniska Mallick, was designed as a ST-sensitive ET model, adopted by
 ECOSTRESS and SBG for improved estimates of ET reflecting mid-day heat
-stress. The STIC model estimates total latent heat flux directly. This
+stress. The STIC-JPL model estimates total latent heat flux directly. This
 instantaneous estimate of latent heat flux is included in the ensemble
 estimate.
 
-The MOD16 algorithm was designed as the ET product for the Moderate
+The PM-JPL (Penman-Monteith) algorithm (Mu et al., 2011; Running et al., 2017) was designed as the ET product for the Moderate
 Resolution Imaging Spectroradiometer (MODIS) and then continued as a
-Visible Infrared Imaging Radiometer Suite (VIIRS) product. MOD16 uses a
+Visible Infrared Imaging Radiometer Suite (VIIRS) product. PM-JPL uses a
 similar approach to PT-JPL and PT-JPL-SM to independently estimate
 vegetation and soil components of instantaneous ET, but using the
-Penman-Monteith formula instead of the Priestley-Taylor. The MOD16
+Penman-Monteith formula instead of the Priestley-Taylor. The PM-JPL
 latent heat flux partitions are summed to total latent heat flux for the
 ensemble estimate.
 
-The BESS model is a coupled surface energy balance and photosynthesis
-model. The latent heat flux component of BESS is also included in the
+The BESS-JPL model (Ryu et al., 2011; Jiang & Ryu, 2016) is a coupled surface energy balance and photosynthesis
+model. The latent heat flux component of BESS-JPL is also included in the
 ensemble estimate.
 
 The median of total latent heat flux in watts per square meter from the
-PT-JPL, STIC, MOD16, and BESS models is upscaled to a daily ET estimate
-in millimeters per day and recorded in the L3T ET product as ETdaily.
+PT-JPL-SM, STIC-JPL, PM-JPL, and BESS-JPL models is upscaled to a daily ET estimate
+in millimeters per day and recorded in the L3T JET product as ETdaily.
 The standard deviation between these multiple estimates of ET is
 considered the uncertainty for the SBG evapotranspiration product, as
 ETinstUncertainty. The layers for the L3T JET products are listed in
@@ -359,9 +359,9 @@ distributed in the L4T ESI product as listed in Table 5.
 
 **Table 5.** Listing of the L4T ESI data layers.
 
-The BESS GPP estimate represents the amount of carbon that plants are
+The BESS-JPL GPP estimate represents the amount of carbon that plants are
 taking in. The transpiration component of PT-JPL-SM represents the
-amount of water that plants are releasing. The BESS GPP is divided by
+amount of water that plants are releasing. The BESS-JPL GPP is divided by
 the PT-JPL-SM transpiration to estimate water use efficiency (WUE), the
 ratio of grams of carbon that plants take in to kilograms of water that
 plants release. These WUE and GPP estimates are distributed in the L4T
@@ -457,12 +457,24 @@ SBG mission and PI of the ROSES project to re-design the SBG products.
 
 We would like to thank Adam Purdy for contributing the PT-JPL-SM model.
 
-We would like to thank Kaniska Mallick for contributing the STIC model.
+We would like to thank Kaniska Mallick for contributing the STIC-JPL model.
 
-We would like to thank Martha Anderson for contributing the DisALEXI-JPL
-algorithm.
+We would like to thank Youngryel Ryu for contributing the BESS-JPL model.
 
 # Bibliography
 
-Schaaf, C. (2017). *VIIRS BRDF, Albedo, and NBAR Product Algorithm
-Theoretical Basis Document (ATBD).* NASA Goddard Space Flight Center.
+Jiang, C., & Ryu, Y. (2016). Multi-scale evaluation of global gross primary productivity and evapotranspiration products derived from Breathing Earth System Simulator (BESS). *Remote Sensing of Environment*, 186, 528-547.
+
+Kobayashi, H., & Iwabuchi, H. (2008). A coupled 1-D atmosphere and 3-D canopy radiative transfer model for canopy reflectance, light environment, and photosynthesis simulation in a heterogeneous landscape. *Remote Sensing of Environment*, 112(1), 173-185.
+
+Mallick, K., Jarvis, A. J., Boegh, E., Fisher, J. B., Drewry, D. T., Tu, K. P., ... & Niyogi, D. (2018). A surface temperature initiated closure (STIC) for turbulent sensible and latent heat flux measurements. *Agricultural and Forest Meteorology*, 248, 392-410.
+
+Mu, Q., Zhao, M., & Running, S. W. (2011). Improvements to a MODIS global terrestrial evapotranspiration algorithm. *Remote Sensing of Environment*, 115(8), 1781-1800.
+
+Purdy, A. J., Fisher, J. B., Goulden, M. L., Colliander, A., Halverson, G., Tu, K., ... & Famiglietti, J. S. (2018). SMAP soil moisture improves global evapotranspiration. *Remote Sensing of Environment*, 219, 1-14.
+
+Running, S., Mu, Q., Zhao, M., & Moreno, A. (2017). *MODIS Global Terrestrial Evapotranspiration (ET) Product (NASA MOD16A2/A3) NASA Earth Observing System MODIS Land Algorithm (For Collection 6)*. NASA Goddard Space Flight Center.
+
+Ryu, Y., Baldocchi, D. D., Kobayashi, H., van Ingen, C., Li, J., Black, T. A., ... & Vargas, R. (2011). Integration of MODIS land and atmosphere products with a coupled-process model to estimate gross primary productivity and evapotranspiration from 1 km to global scales. *Global Biogeochemical Cycles*, 25(4).
+
+Schaaf, C. (2017). *VIIRS BRDF, Albedo, and NBAR Product Algorithm Theoretical Basis Document (ATBD).* NASA Goddard Space Flight Center.
