@@ -8,7 +8,20 @@ NASA Jet Propulsion Laboratory 329G
 
 ## ECOSTRESS Granules Data Layers
 
-This document provides a detailed listing of the data layers available in the ECOSTRESS granules for various products, including L3T ETAUX, L3T JET, L4T ESI, and L4T WUE.
+This document provides a detailed listing of the data layers available in the ECOSTRESS granules for various products, including L2T STARS, L3T ETAUX, L3T JET, L4T ESI, and L4T WUE.
+
+### L2T STARS NDVI & Albedo Product
+
+| **Name** | **Description** | **Type** | **Units** | **Fill Value** | **No Data Value** | **Valid Min** | **Valid Max** | **Scale Factor** |**Size** |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | -- |
+| NDVI | Normalized Difference Vegetation Index | float32 | Index | NaN | N/A | -1 | 1 | N/A | 12.96 mb |
+| NDVI-UQ | NDVI Uncertainty | float32 | Index | NaN | N/A | -1 | 1 | N/A | 12.96 mb |
+| NDVI-bias | NDVI Bias | float32 | Index | NaN | N/A | N/A | N/A | N/A | 12.96 mb |
+| NDVI-bias-UQ | NDVI Bias Uncertainty | float32 | Index | NaN | N/A | N/A | N/A | N/A | 12.96 mb |
+| albedo | Albedo | float32 | Ratio | NaN | N/A | 0 | 1 | N/A | 12.96 mb |
+| albedo-UQ | Albedo Uncertainty | float32 | Ratio | NaN | N/A | 0 | 1 | N/A | 12.96 mb |
+| albedo-bias | Albedo Bias | float32 | Ratio | NaN | N/A | N/A | N/A | N/A | 12.96 mb |
+| albedo-bias-UQ | Albedo Bias Uncertainty | float32 | Ratio | NaN | N/A | N/A | N/A | N/A | 12.96 mb |
 
 ### L3T ETAUX Ecosystem Auxiliary Inputs Product
 
