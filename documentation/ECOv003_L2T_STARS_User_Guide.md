@@ -216,8 +216,12 @@ unitless from -1 to 1. The albedo estimates and 1σ uncertainties
 |---|---|---|---|---|---|---|---|---|---|
 | NDVI | Normalized Difference Vegetation Index | float32 | Index | NaN | N/A | -1 | 1 | N/A | 12.96 mb |
 | NDVI-UQ | NDVI Uncertainty | float32 | Index | NaN | N/A | -1 | 1 | N/A | 12.96 mb |
+| NDVI-bias | NDVI Bias | float32 | Index | NaN | N/A | N/A | N/A | N/A | 12.96 mb |
+| NDVI-bias-UQ | NDVI Bias Uncertainty | float32 | Index | NaN | N/A | N/A | N/A | N/A | 12.96 mb |
 | albedo | Albedo | float32 | Ratio | NaN | N/A | 0 | 1 | N/A | 12.96 mb |
 | albedo-UQ | Albedo Uncertainty | float32 | Ratio | NaN | N/A | 0 | 1 | N/A | 12.96 mb |
+| albedo-bias | Albedo Bias | float32 | Ratio | NaN | N/A | N/A | N/A | N/A | 12.96 mb |
+| albedo-bias-UQ | Albedo Bias Uncertainty | float32 | Ratio | NaN | N/A | N/A | N/A | N/A | 12.96 mb |
 
 **Table 2.** Listing of the L2T STARS data layers.
 
