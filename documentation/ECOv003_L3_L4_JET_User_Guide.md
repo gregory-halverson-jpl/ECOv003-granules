@@ -1,13 +1,12 @@
-# ECOSTRESS Level-3 Evapotranspiration (JET) Data Products User Guide
+# ECOSTRESS Collection 3 Level-3 Evapotranspiration (JET) Data Products User Guide
 
 **ECOsystem Spaceborne Thermal Radiometer Experiment on Space Station (ECOSTRESS)**
 
-**Version 3**  
-**October 7, 2025**
+**October 8, 2025**
 
 ## Authors
 
-**Gregory Halverson**  
+**Gregory H. Halverson**  
 ECOSTRESS Science Team  
 Jet Propulsion Laboratory  
 California Institute of Technology
@@ -17,7 +16,32 @@ ECOSTRESS Science Team
 Jet Propulsion Laboratory  
 California Institute of Technology
 
+**Madeleine Pascolini-Campbell**  
+ECOSTRESS Science Team  
+Jet Propulsion Laboratory  
+California Institute of Technology
+
+**Simon Hook**  
+ECOSTRESS Science Team  
+Jet Propulsion Laboratory  
+California Institute of Technology
+
+**AJ Purdy**  
+ECOSTRESS Science Team  
+Jet Propulsion Laboratory  
+California Institute of Technology
+
 **Margaret Johnson**  
+ECOSTRESS Science Team  
+Jet Propulsion Laboratory  
+California Institute of Technology
+
+**Evan Davis**  
+ECOSTRESS Science Team  
+Jet Propulsion Laboratory  
+California Institute of Technology
+
+**Munish Sikka**  
 ECOSTRESS Science Team  
 Jet Propulsion Laboratory  
 California Institute of Technology
@@ -49,7 +73,7 @@ the Jet Propulsion Laboratory, California Institute of Technology.
 © 2025. California Institute of Technology. Government sponsorship
 acknowledged.
 
-## Note
+---
 
 The users' guide is designed to be a living document that describes the ECOSTRESS data products. The document describes the current state of the
 art and is revised as progress is made in the development and assessment
@@ -58,21 +82,6 @@ to present an overview of the ECOSTRESS data products to the potential
 user. For more detailed information on the physical basis and algorithms
 used to produce these products, please see the Algorithm Theoretical
 Basis Document (ATBD).
-
-**Change History Log**
-
-| **Revision** | **Effective Date** | **Prepared by** | **Description of Changes** |
-|---|---|---|---|
-| Draft | 8/24/2022 | Gregory Halverson, Kerry Cawse-Nicholson | User Guide first draft |
-| Draft | 12/15/2022 | Margaret Johnson, Kerry Cawse-Nicholson | STARS Description |
-| Draft | 12/15/2022 | Gregory Halverson | L1C Processing |
-| Draft | 01/12/2023 | Gregory Halverson | Editing for URS submission |
-| Draft | 11/07/2023 | Claire Villanueva-Weeks | Fixed resolution, added logo |
-| Draft | 02/27/2024 | Claire Villanueva-Weeks, Gregory Halverson | Removed L1CT/L1CG, L2T/L2G LSTE, L3G, L4G products; added product metadata table |
-| Draft | 04/23/2024 | Claire Villanueva-Weeks, Gregory Halverson | Expanding product layer tables |
-| Draft | 06/11/2024 | Gregory Halverson | Auxiliary data product bundle |
-| Draft | 08/13/2024 | Claire Villanueva-Weeks | Removed STARS |
-| Version 3 | 10/07/2025 | Gregory Halverson | Updated data layer tables to match code implementation; corrected L3T ETAUX and L3T JET product specifications; fixed product naming consistency; aligned with README documentation; converted all tables to standard markdown format |
 
 **Contacts**
 
@@ -105,11 +114,6 @@ the following:
 
   Office: (818) 354-8885
 
-- Claire Villanueva-Weeks
-
-  Jet Propulsion Laboratory\
-  4800 Oak Grove Dr.\
-  Pasadena, CA 91109
 
 
 ## Table of Contents
@@ -171,9 +175,9 @@ include the letter T in their level identifiers: L1CT, L2T, L3T, and
 L4T. The tiling system used for ECOSTRESS is borrowed from the modified
 Military Grid Reference System (MGRS) tiling scheme used by Sentinel 2.
 These tiles divide the Universal Transverse Mercator (UTM) zones into
-square tiles 109800 m across. ECOSTRESS uses a 60 m cell size with 1830
-rows by 1830 columns in each tile, totaling 3.35 million pixels per
-tile. This allows the end user to assume that each 60 m ECOSTRESS pixel
+square tiles 109800 m across. ECOSTRESS uses a 70 m cell size with 1568
+rows by 1568 columns in each tile, totaling 2.46 million pixels per
+tile. This allows the end user to assume that each 70 m ECOSTRESS pixel
 will remain in the same location at each timestep observed in analysis.
 The COG format also facilitates end-user analysis as a universally
 recognized and supported format, compatible with open-source software,
@@ -244,7 +248,7 @@ humidity (RH) are taken from the GEOS-5 FP tavg1_2d_slv_Nx product. Ta
 and RH are down-scaled using a linear regression between up-sampled ST,
 NDVI, and albedo as predictor variables to Ta or RH from GEOS-5 FP as a
 response variable, within each Sentinel tile. These regression
-coefficients are then applied to the 60 m ST, NDVI, and albedo, and this
+coefficients are then applied to the 70 m ST, NDVI, and albedo, and this
 first-pass estimate is then bias-corrected to the coarse image from
 GEOS-5 FP. These downscaled meteorology estimates are recorded in the
 L3T ETAUX product listed in Table 3. Areas of cloud are filled in with
