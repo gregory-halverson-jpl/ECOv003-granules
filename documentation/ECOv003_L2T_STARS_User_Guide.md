@@ -1,50 +1,39 @@
-# ECOSTRESS STARS NDVI & Albedo User Guide
+# ECOSTRESS Collection 3 Level-2 STARS NDVI & Albedo Data Product User Guide
 
-**ECOsystem Spaceborne Thermal Radiometer Experiment on Space Station (SBG)**
+**ECOsystem Spaceborne Thermal Radiometer Experiment on Space Station (ECOSTRESS)**
 
-**Version 2**  
-**August 13, 2024**
+**October 8, 2025**
 
 ## Authors
 
-**Gregory Halverson**  
-SBG Science Team  
+**Gregory H. Halverson**  
+ECOSTRESS Science Team  
 Jet Propulsion Laboratory  
 California Institute of Technology
 
 **Kerry Cawse-Nicholson**  
-SBG Science Team  
+ECOSTRESS Science Team  
 Jet Propulsion Laboratory  
 California Institute of Technology
 
 **Margaret Johnson**  
-SBG Science Team  
+ECOSTRESS Science Team  
 Jet Propulsion Laboratory  
 California Institute of Technology
 
 **Claire Villanueva-Weeks**  
-SBG Science Team  
+ECOSTRESS Science Team  
 Jet Propulsion Laboratory  
 California Institute of Technology
 
 ---
 
-*© 2024 California Institute of Technology. Government sponsorship acknowledged.*
+*© 2025 California Institute of Technology. Government sponsorship acknowledged.*
 
 **National Aeronautics and Space Administration**  
 Jet Propulsion Laboratory  
 4800 Oak Grove Drive  
 Pasadena, California 91109-8099  
-California Institute of Technology
-
-National Aeronautics and Space Administration
-
-Jet Propulsion Laboratory
-
-4800 Oak Grove Drive
-
-Pasadena, California 91109-8099
-
 California Institute of Technology
 
 This research was carried out at the Jet Propulsion Laboratory,
@@ -56,29 +45,18 @@ by trade name, trademark, manufacturer, or otherwise, does not
 constitute or imply its endorsement by the United States Government or
 the Jet Propulsion Laboratory, California Institute of Technology.
 
-© 2024. California Institute of Technology. Government sponsorship
+© 2025. California Institute of Technology. Government sponsorship
 acknowledged.
 
-## Note
+---
 
-The users' guide is designed to be a living document that describes the SBG data products. The document describes the current state of the art
-and is revised as progress is made in the development and assessment of
-the SBG data products. The primary purpose of the document is to present
-an overview of the SBG data products to the potential user. For more
-detailed information on the physical basis and algorithms used to
-produce these products, please see the Algorithm Theoretical Basis
-Document (ATBD).
-
-**Change History Log**
-
-  ----------------------------------------------------------------------------
-  **Revision**   **Effective     **Prepared by**    **Description of Changes**
-                 Date**                             
-  -------------- --------------- ------------------ --------------------------
-  Draft          8/12/2024       Claire             STARS user Guide first
-                                 Villanueva-Weeks   draft
-
-  ----------------------------------------------------------------------------
+The users' guide is designed to be a living document that describes the ECOSTRESS data products. The document describes the current state of the
+art and is revised as progress is made in the development and assessment
+of the ECOSTRESS data products. The primary purpose of the document is
+to present an overview of the ECOSTRESS data products to the potential
+user. For more detailed information on the physical basis and algorithms
+used to produce these products, please see the Algorithm Theoretical
+Basis Document (ATBD).
 
 **Contacts**
 
@@ -111,17 +89,7 @@ the following:
 
   Office: (818) 354-8885
 
-<!-- -->
 
-- Claire Villanueva-Weeks
-
-  Jet Propulsion Laboratory\
-  4800 Oak Grove Dr.\
-  Pasadena, CA 91109
-
-  Email: <claire.s.villanueva-weeks@jpl.nasa.gov>
-
-  Office: (818) 354-9268
 
 ## Table of Contents
 
@@ -129,57 +97,59 @@ the following:
    - [Cloud-Optimized GeoTIFF Orbit/Scene/Tile Products](#cloud-optimized-geotiff-orbitscenetile-products)
    - [Quality Flags](#quality-flags)
    - [Product Availability](#product-availability)
-2. [L2T STARS NDVI and Albedo Product](#l2t-stars-ndvi-and-albedo-product)
+2. [L2T STARS NDVI & Albedo Product](#l2t-stars-ndvi-and-albedo-product)
 3. [Standard Metadata](#standard-metadata)
 4. [Acknowledgements](#acknowledgements)
 5. [Bibliography](#bibliography)
 
 ### List of Tables
 
-- Table 1: Listing of SBG tiled products long names and short names
+- Table 1: Listing of ECOSTRESS tiled products long names and short names
 - Table 2: Listing of the L2T STARS data layers
-- Table 8: Name and type of metadata fields contained in the common StandardMetadata group
-- Table 9: Name and type of metadata fields contained in the common ProductMetadata group
-
-[Table 5. Listing of the L4T ESI data layers.
-[13](#_Toc169011115)](#_Toc169011115)
+- Table 3: StandardMetadata fields in L2T/L3T/L4T products
+- Table 4: ProductMetadata fields in L2T/L3T/L4T products
 
 
 
-# 1. Introduction
+# Introduction
 
-This is the user guide for the SBG tiled products. SBG acquires data within an orbit, and this orbit path is divided into scenes roughly 935 x 935 km in size. The SBG orbit/scene/tile products are distributed in Cloud-Optimized GeoTIFF (COG) format. The tiled products are listed in Table 1.
+This is the user guide for the ECOSTRESS tiled products. ECOSTRESS
+acquires data within an orbit, and this orbit path is divided into
+scenes roughly 935 x 935 km in size. The ECOSTRESS orbit/scene/tile
+products are distributed in Cloud-Optimized GeoTIFF (COG) format. The
+tiled products are listed in Table 1.
 
-| Product Long Name | Product Short Name |
+| **Product Long Name** | **Product Short Name** |
 |---|---|
 | STARS NDVI/Albedo | L2T STARS |
 | Surface Energy Balance | L3T SEB |
 | Soil Moisture | L3T SM |
 | Meteorology | L3T MET |
-| Evapotranspiration Ensemble | L3T ET |
+| Ecosystem Auxiliary Inputs | L3T ETAUX |
+| Evapotranspiration Ensemble | L3T JET |
 | DisALEXI-JPL Evapotranspiration | L3T ET ALEXI |
 | Evaporative Stress Index | L4T ESI |
 | DisALEXI-JPL Evaporative Stress Index | L4T ESI ALEXI |
 | Water Use Efficiency | L4T WUE |
 
-**Table 1.** Listing of SBG tiled products long names and short names.
+**Table 1.** Listing of ECOSTRESS tiled products long names and short names.
 
 ## Cloud-Optimized GeoTIFF Orbit/Scene/Tile Products 
 
-To provide an analysis-ready format, the SBG products are distributed in
-a tiled form and using the COG format. The tiled products include the
-letter T in their level identifiers: L1CT, L2T, L3T, and L4T. The tiling
-system used for SBG is borrowed from the modified Military Grid
-Reference System (MGRS) tiling scheme used by Sentinel 2. These tiles
-divide the Universal Transverse Mercator (UTM) zones into square tiles
-109800 m across. SBG uses a 60 m cell size with 1830 rows by 1830
-columns in each tile, totaling 3.35 million pixels per tile. This allows
-the end user to assume that each 60 m SBG pixel will remain in the same
-location at each timestep observed in analysis. The COG format also
-facilitates end-user analysis as a universally recognized and supported
-format, compatible with open-source software, including QGIS, ArcGIS,
-GDAL, the Raster package in R, rioxarray in Python, and Rasters.jl in
-Julia.
+To provide an analysis-ready format, the ECOSTRESS products are
+distributed in a tiled form and using the COG format. The tiled products
+include the letter T in their level identifiers: L1CT, L2T, L3T, and
+L4T. The tiling system used for ECOSTRESS is borrowed from the modified
+Military Grid Reference System (MGRS) tiling scheme used by Sentinel 2.
+These tiles divide the Universal Transverse Mercator (UTM) zones into
+square tiles 109800 m across. ECOSTRESS uses a 70 m cell size with 1568
+rows by 1568 columns in each tile, totaling 2.46 million pixels per
+tile. This allows the end user to assume that each 70 m ECOSTRESS pixel
+will remain in the same location at each timestep observed in analysis.
+The COG format also facilitates end-user analysis as a universally
+recognized and supported format, compatible with open-source software,
+including QGIS, ArcGIS, GDAL, the Raster package in R, rioxarray in
+Python, and Rasters.jl in Julia.
 
 Each float32 data layer occupies 4 bytes of storage per pixel, which
 amounts to an uncompressed size of 13.4 mb for each tiled data layer.
@@ -210,14 +180,15 @@ missing values.
 
 ## Product Availability
 
-The SBG products are available at the NASA Land Processes Distribution
-Active Archive Center (LP-DAAC), https://earthdata.nasa.gov/ and can be
-accessed via the Earthdata search engine.
+The ECOSTRESS products are available at the NASA Land Processes
+Distribution Active Archive Center (LP-DAAC),
+https://earthdata.nasa.gov/ and can be accessed via the Earthdata search
+engine.
 
-# 2. L2T STARS NDVI and Albedo Product
+# L2T STARS NDVI & Albedo Product
 
-NDVI and albedo are estimated at 60 m SBG standard resolution for each
-daytime SBG overpass by fusing temporally sparse but fine spatial
+NDVI and albedo are estimated at 70 m ECOSTRESS standard resolution for each
+daytime ECOSTRESS overpass by fusing temporally sparse but fine spatial
 resolution images from the Harmonized Landsat Sentinel (HLS) 2.0 product
 with daily, moderate spatial resolution images from the Suomi NPP
 Visible Infrared Imaging Radiometer Suite (VIIRS) VNP09GA product. The
@@ -232,16 +203,7 @@ Operationally, each L2T STARS tile run loads the means and covariances
 of the STARS model saved from the most recent tile run, then iteratively
 advances the means and covariances forward each day updating with fine
 imagery from HLS and/or moderate resolution imagery from VIIRS up to the
-day of the target SBG overpass. A pixelwise, lagged 16-day
-implementation of the VNP43 algorithm (Schaaf, 2017) is used for a
-near-real-time BRDF correction on the VNP09GA products to produce VIIRS
-NDVI and albedo.
-
-Operationally, each L2T STARS tile run loads the means and covariances
-of the STARS model saved from the most recent tile run, then iteratively
-advances the means and covariances forward each day updating with fine
-imagery from HLS and/or moderate resolution imagery from VIIRS up to the
-day of the target SBG overpass. A pixelwise, lagged 16-day
+day of the target ECOSTRESS overpass. A pixelwise, lagged 16-day
 implementation of the VNP43 algorithm (Schaaf, 2017) is used for a
 near-real-time BRDF correction on the VNP09GA products to produce VIIRS
 NDVI and albedo. The layers of the L2T STARS product are listed in Table
@@ -250,25 +212,26 @@ arrays. The NDVI estimates and 1σ uncertainties (-UQ) are
 unitless from -1 to 1. The albedo estimates and 1σ uncertainties
 (-UQ) are proportions from 0 to 1.
 
-| Name | Description | Type | Units | Fill Value | No Data Value | Valid Min | Valid Max | Size |
-|---|---|---|---|---|---|---|---|---|
-| NDVI | Normalized Difference Vegetation Index | float32 | Index | NaN | N/A | -1 | 1 | 12.96 mb |
-| NDVI-UQ | NDVI Uncertainty | float32 | Index | NaN | N/A | -1 | 1 | 12.96 mb |
-| albedo | Albedo | float32 | Ratio | NaN | N/A | 0 | 1 | 12.96 mb |
-| albedo-UQ | Albedo Uncertainty | float32 | Ratio | NaN | N/A | 0 | 1 | 12.96 mb |
+| **Name** | **Description** | **Type** | **Units** | **Fill Value** | **No Data Value** | **Valid Min** | **Valid Max** | **Scale Factor** | **Size** |
+|---|---|---|---|---|---|---|---|---|---|
+| NDVI | Normalized Difference Vegetation Index | float32 | Index | NaN | N/A | -1 | 1 | N/A | 12.96 mb |
+| NDVI-UQ | NDVI Uncertainty | float32 | Index | NaN | N/A | -1 | 1 | N/A | 12.96 mb |
+| albedo | Albedo | float32 | Ratio | NaN | N/A | 0 | 1 | N/A | 12.96 mb |
+| albedo-UQ | Albedo Uncertainty | float32 | Ratio | NaN | N/A | 0 | 1 | N/A | 12.96 mb |
 
 **Table 2.** Listing of the L2T STARS data layers.
 
-# 3. Standard Metadata
+# Standard Metadata
 
-Each SBG product bundle contains two sets of product metadata:
+Each ECOSTRESS product bundle contains two sets of product metadata:
 
 - ProductMetadata
 
 - StandardMetadata
 
 Each product contains a custom set of ProductMetadata attributes, as
-The ProductMetadata attributes are listed in Table 9. The StandardMetadata attributes are consistent across products at each orbit/scene, as listed in Table 8.
+listed in Table 4. The StandardMetadata attributes are consistent across
+products at each orbit/scene, as listed in Table 3.
 
 | Name | Type |
 |---|---|
@@ -319,9 +282,9 @@ The ProductMetadata attributes are listed in Table 9. The StandardMetadata attri
 | StopOrbitNumber | string |
 | WestBoundingCoordinate | float |
 
-**Table 8.** Name and type of metadata fields contained in the common StandardMetadata group in each L2T/L3T/L4T product.
+**Table 3.** Name and type of metadata fields contained in the common StandardMetadata group in each L2T/L3T/L4T product.
 
-| Name | Type |
+| **Name** | **Type** |
 |---|---|
 | BandSpecification | float |
 | NumberOfBands | integer |
@@ -330,19 +293,16 @@ The ProductMetadata attributes are listed in Table 9. The StandardMetadata attri
 | QAPercentGoodQuality | float |
 | AuxiliaryNWP | string |
 
-**Table 9.** Name and type of metadata fields contained in the common ProductMetadata group in each L2T/L3T/L4T product.
+**Table 4.** Name and type of metadata fields contained in the common ProductMetadata group in each L2T/L3T/L4T product.
 
-# 4. Acknowledgements
+# Acknowledgements
 
 We would like to thank Joshua Fisher as the initial science lead of the
-SBG mission and PI of the ROSES project to re-design the SBG products.
+ECOSTRESS mission and PI of the ROSES project to re-design the ECOSTRESS products.
 
-We would like to thank Adam Purdy for contributing the PT-JPL-SM model.
+We would like to thank the HLS and VIIRS teams for providing the input data products that make STARS data fusion possible.
 
-We would like to thank Kaniska Mallick for contributing the STIC model.
-
-We would like to thank Martha Anderson for contributing the DisALEXI-JPL
-algorithm.
+We would like to thank the entire ECOSTRESS Science Team for their contributions to algorithm development and product validation.
 
 # 5. Bibliography
 
