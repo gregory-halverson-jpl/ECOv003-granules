@@ -26,17 +26,20 @@ def write_L3T_JET(
             time_UTC: datetime,
             build: str,
             product_counter: int,
-            LE_PTJPLSM: Raster,
-            ET_PTJPLSM: Raster,
-            ET_STICJPL: Raster,
-            ET_BESSJPL: Raster,
-            ET_PMJPL: Raster,
-            ET_daily_kg: Raster,
-            ETinstUncertainty: Raster,
-            PTJPLSMcanopy: Raster,
-            STICJPLcanopy: Raster,
-            PTJPLSMsoil: Raster,
-            PTJPLSMinterception: Raster,
+            LE_instantaneous_PTJPLSM_Wm2: Raster,
+            ET_daylight_PTJPLSM_kg: Raster,
+            LE_instantaneous_STICJPL_Wm2: Raster,
+            ET_daylight_STICJPL_kg: Raster,
+            LE_instantaneous_BESSJPL_Wm2: Raster,
+            ET_daylight_BESSJPL_kg: Raster,
+            LE_instantaneous_PMJPL_Wm2: Raster,
+            ET_daylight_PMJPL_kg: Raster,
+            ET_daylight_kg: Raster,
+            ET_daylight_uncertainty_kg: Raster,
+            LE_canopy_fraction_PTJPLSM: Raster,
+            LE_canopy_fraction_STIC: Raster,
+            LE_soil_fraction_PTJPLSM: Raster,
+            LE_interception_fraction_PTJPLSM: Raster,
             water_mask: Raster,
             cloud_mask: Raster,
             metadata: dict):
@@ -50,69 +53,84 @@ def write_L3T_JET(
             process_count=product_counter
         )
 
-        LE_PTJPLSM.nodata = np.nan
-        LE_PTJPLSM = rt.where(water_mask, np.nan, LE_PTJPLSM)
-        LE_PTJPLSM = LE_PTJPLSM.astype(np.float32)
+        LE_instantaneous_PTJPLSM_Wm2.nodata = np.nan
+        LE_instantaneous_PTJPLSM_Wm2 = rt.where(water_mask, np.nan, LE_instantaneous_PTJPLSM_Wm2)
+        LE_instantaneous_PTJPLSM_Wm2 = LE_instantaneous_PTJPLSM_Wm2.astype(np.float32)
 
-        ET_PTJPLSM.nodata = np.nan
-        ET_PTJPLSM = rt.where(water_mask, np.nan, ET_PTJPLSM)
-        ET_PTJPLSM = ET_PTJPLSM.astype(np.float32)
+        ET_daylight_PTJPLSM_kg.nodata = np.nan
+        ET_daylight_PTJPLSM_kg = rt.where(water_mask, np.nan, ET_daylight_PTJPLSM_kg)
+        ET_daylight_PTJPLSM_kg = ET_daylight_PTJPLSM_kg.astype(np.float32)
 
-        ET_STICJPL.nodata = np.nan
-        ET_STICJPL = rt.where(water_mask, np.nan, ET_STICJPL)
-        ET_STICJPL = ET_STICJPL.astype(np.float32)
+        ET_to_LE_scale_factor_PTJPLSM = LE_instantaneous_PTJPLSM_Wm2 / ET_daylight_PTJPLSM_kg
+        ET_to_LE_scale_factor_PTJPLSM_mean = np.nanmean(ET_to_LE_scale_factor_PTJPLSM)
+
+        ET_daylight_STICJPL_kg.nodata = np.nan
+        ET_daylight_STICJPL_kg = rt.where(water_mask, np.nan, ET_daylight_STICJPL_kg)
+        ET_daylight_STICJPL_kg = ET_daylight_STICJPL_kg.astype(np.float32)
         
-        ET_BESSJPL.nodata = np.nan
-        ET_BESSJPL = rt.where(water_mask, np.nan, ET_BESSJPL)
-        ET_BESSJPL = ET_BESSJPL.astype(np.float32)
+        ET_to_LE_scale_factor_STICJPL = LE_instantaneous_STICJPL_Wm2 / ET_daylight_STICJPL_kg
+        ET_to_LE_scale_factor_STICJPL_mean = np.nanmean(ET_to_LE_scale_factor_STICJPL)
+
+        ET_daylight_BESSJPL_kg.nodata = np.nan
+        ET_daylight_BESSJPL_kg = rt.where(water_mask, np.nan, ET_daylight_BESSJPL_kg)
+        ET_daylight_BESSJPL_kg = ET_daylight_BESSJPL_kg.astype(np.float32)
         
-        ET_PMJPL.nodata = np.nan
-        ET_PMJPL = rt.where(water_mask, np.nan, ET_PMJPL)
-        ET_PMJPL = ET_PMJPL.astype(np.float32)
+        ET_to_LE_scale_factor_BESSJPL = LE_instantaneous_BESSJPL_Wm2 / ET_daylight_BESSJPL_kg
+        ET_to_LE_scale_factor_BESSJPL_mean = np.nanmean(ET_to_LE_scale_factor_BESSJPL)
         
-        ET_daily_kg.nodata = np.nan
-        # ET_daily_kg = rt.where(water_mask, np.nan, ET_daily_kg)
-        ET_daily_kg = ET_daily_kg.astype(np.float32)
+        ET_daylight_PMJPL_kg.nodata = np.nan
+        ET_daylight_PMJPL_kg = rt.where(water_mask, np.nan, ET_daylight_PMJPL_kg)
+        ET_daylight_PMJPL_kg = ET_daylight_PMJPL_kg.astype(np.float32)
         
-        ETinstUncertainty.nodata = np.nan
-        ETinstUncertainty = rt.where(water_mask, np.nan, ETinstUncertainty)
-        ETinstUncertainty = ETinstUncertainty.astype(np.float32)
+        ET_to_LE_scale_factor_PMJPL = LE_instantaneous_PMJPL_Wm2 / ET_daylight_PMJPL_kg
+        ET_to_LE_scale_factor_PMJPL_mean = np.nanmean(ET_to_LE_scale_factor_PMJPL)
         
-        PTJPLSMcanopy.nodata = np.nan
-        PTJPLSMcanopy = rt.where(water_mask, np.nan, PTJPLSMcanopy)
-        PTJPLSMcanopy = PTJPLSMcanopy.astype(np.float32)
+        ET_daylight_kg.nodata = np.nan
+        ET_daylight_kg = ET_daylight_kg.astype(np.float32)
         
-        STICJPLcanopy.nodata = np.nan
-        STICJPLcanopy = rt.where(water_mask, np.nan, STICJPLcanopy)
-        STICJPLcanopy = STICJPLcanopy.astype(np.float32)
+        ET_daylight_uncertainty_kg.nodata = np.nan
+        ET_daylight_uncertainty_kg = rt.where(water_mask, np.nan, ET_daylight_uncertainty_kg)
+        ET_daylight_uncertainty_kg = ET_daylight_uncertainty_kg.astype(np.float32)
         
-        PTJPLSMsoil.nodata = np.nan
-        PTJPLSMsoil = rt.where(water_mask, np.nan, PTJPLSMsoil)
-        PTJPLSMsoil = PTJPLSMsoil.astype(np.float32)
+        LE_canopy_fraction_PTJPLSM.nodata = np.nan
+        LE_canopy_fraction_PTJPLSM = rt.where(water_mask, np.nan, LE_canopy_fraction_PTJPLSM)
+        LE_canopy_fraction_PTJPLSM = LE_canopy_fraction_PTJPLSM.astype(np.float32)
         
-        PTJPLSMinterception.nodata = np.nan
-        PTJPLSMinterception = rt.where(water_mask, np.nan, PTJPLSMinterception)
-        PTJPLSMinterception = PTJPLSMinterception.astype(np.float32)
+        LE_canopy_fraction_STIC.nodata = np.nan
+        LE_canopy_fraction_STIC = rt.where(water_mask, np.nan, LE_canopy_fraction_STIC)
+        LE_canopy_fraction_STIC = LE_canopy_fraction_STIC.astype(np.float32)
+        
+        LE_soil_fraction_PTJPLSM.nodata = np.nan
+        LE_soil_fraction_PTJPLSM = rt.where(water_mask, np.nan, LE_soil_fraction_PTJPLSM)
+        LE_soil_fraction_PTJPLSM = LE_soil_fraction_PTJPLSM.astype(np.float32)
+        
+        LE_interception_fraction_PTJPLSM.nodata = np.nan
+        LE_interception_fraction_PTJPLSM = rt.where(water_mask, np.nan, LE_interception_fraction_PTJPLSM)
+        LE_interception_fraction_PTJPLSM = LE_interception_fraction_PTJPLSM.astype(np.float32)
         
         water_mask = water_mask.astype(np.uint8)
         cloud_mask = cloud_mask.astype(np.uint8)
 
-        L3T_JET_granule.add_layer("PTJPLSMinst", LE_PTJPLSM, cmap=ET_COLORMAP)
-        L3T_JET_granule.add_layer("PTJPLSMdaily", ET_PTJPLSM, cmap=ET_COLORMAP)
-        L3T_JET_granule.add_layer("STICJPLdaily", ET_STICJPL, cmap=ET_COLORMAP)
-        L3T_JET_granule.add_layer("BESSJPLdaily", ET_BESSJPL, cmap=ET_COLORMAP)
-        L3T_JET_granule.add_layer("PMJPLdaily", ET_PMJPL, cmap=ET_COLORMAP)
-        L3T_JET_granule.add_layer("ETdaily", ET_daily_kg, cmap=ET_COLORMAP)
-        L3T_JET_granule.add_layer("ETinstUncertainty", ETinstUncertainty, cmap="jet")
-        L3T_JET_granule.add_layer("PTJPLSMcanopy", PTJPLSMcanopy, cmap=ET_COLORMAP)
-        L3T_JET_granule.add_layer("STICJPLcanopy", STICJPLcanopy, cmap=ET_COLORMAP)
-        L3T_JET_granule.add_layer("PTJPLSMsoil", PTJPLSMsoil, cmap=ET_COLORMAP)
-        L3T_JET_granule.add_layer("PTJPLSMinterception", PTJPLSMinterception, cmap=ET_COLORMAP)
+        L3T_JET_granule.add_layer("PTJPLSMinst", LE_instantaneous_PTJPLSM_Wm2, cmap=ET_COLORMAP)
+        L3T_JET_granule.add_layer("PTJPLSMdaily", ET_daylight_PTJPLSM_kg, cmap=ET_COLORMAP)
+        L3T_JET_granule.add_layer("STICJPLdaily", ET_daylight_STICJPL_kg, cmap=ET_COLORMAP)
+        L3T_JET_granule.add_layer("BESSJPLdaily", ET_daylight_BESSJPL_kg, cmap=ET_COLORMAP)
+        L3T_JET_granule.add_layer("PMJPLdaily", ET_daylight_PMJPL_kg, cmap=ET_COLORMAP)
+        L3T_JET_granule.add_layer("ETdaily", ET_daylight_kg, cmap=ET_COLORMAP)
+        L3T_JET_granule.add_layer("ETuncertainty", ET_daylight_uncertainty_kg, cmap="jet")
+        L3T_JET_granule.add_layer("PTJPLSMcanopy", LE_canopy_fraction_PTJPLSM, cmap=ET_COLORMAP)
+        L3T_JET_granule.add_layer("STICJPLcanopy", LE_canopy_fraction_STIC, cmap=ET_COLORMAP)
+        L3T_JET_granule.add_layer("PTJPLSMsoil", LE_soil_fraction_PTJPLSM, cmap=ET_COLORMAP)
+        L3T_JET_granule.add_layer("PTJPLSMinterception", LE_interception_fraction_PTJPLSM, cmap=ET_COLORMAP)
         L3T_JET_granule.add_layer("water", water_mask, cmap=WATER_COLORMAP)
         L3T_JET_granule.add_layer("cloud", cloud_mask, cmap=CLOUD_COLORMAP)
 
-        percent_good_quality = 100 * (1 - np.count_nonzero(np.isnan(ET_PTJPLSM)) / ET_PTJPLSM.size)
-        metadata["ProductMetadata"]["QAPercentGoodQuality"] = percent_good_quality
+        percent_good_quality = 100 * (1 - np.count_nonzero(np.isnan(ET_daylight_PTJPLSM_kg)) / ET_daylight_PTJPLSM_kg.size)
+        metadata["ProductMetadata"]["QAPercentGoodQuality"] = float(percent_good_quality)
+        metadata["ProductMetadata"]["ETtoLEScaleFactorPTJPLSM"] = float(ET_to_LE_scale_factor_PTJPLSM_mean)
+        metadata["ProductMetadata"]["ETtoLEScaleFactorSTICJPL"] = float(ET_to_LE_scale_factor_STICJPL_mean)
+        metadata["ProductMetadata"]["ETtoLEScaleFactorBESSJPL"] = float(ET_to_LE_scale_factor_BESSJPL_mean)
+        metadata["ProductMetadata"]["ETtoLEScaleFactorPMJPL"] = float(ET_to_LE_scale_factor_PMJPL_mean)
 
         metadata["StandardMetadata"]["BuildID"] = build
         metadata["StandardMetadata"]["LocalGranuleID"] = basename(L3T_JET_zip_filename)
