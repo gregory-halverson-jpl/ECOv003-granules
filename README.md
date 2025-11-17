@@ -41,6 +41,7 @@ This document provides a detailed listing of the data layers available in the EC
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | -- |
 | PTJPLSMinst | PT-JPL-SM Instantaneous | float32 | $$\text{W m}^{-2}$$ | NaN | N/A | N/A | N/A | N/A | 12.06 mb |
 | PTJPLSMdaily | PT-JPL-SM Daily | float32 | $$\text{mm day}^{-1}$$ | NaN | N/A | N/A | N/A | N/A | 12.06 mb |
+| STICJPLinst | STIC-JPL Instantaneous | float32 | $$\text{W m}^{-2}$$ | NaN | N/A | N/A | N/A | N/A | 12.06 mb |
 | STICJPLdaily | STIC-JPL Daily | float32 | $$\text{mm day}^{-1}$$ | NaN | N/A | N/A | N/A | N/A | 12.06 mb |
 | BESSJPLdaily | BESS-JPL Daily | float32 | $$\text{mm day}^{-1}$$ | NaN | N/A | N/A | N/A | N/A | 12.06 mb |
 | PMJPLdaily | PM-JPL (MOD16) Daily | float32 | $$\text{mm day}^{-1}$$ | NaN | N/A | N/A | N/A | N/A | 12.06 mb |
