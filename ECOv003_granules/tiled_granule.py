@@ -50,7 +50,6 @@ class ECOSTRESSTiledGranule(ECOSTRESSGranule):
             build: str = None,
             process_count: int = None,
             *args,
-            product_name: str = None,
             containing_directory: str = None,
             compression: str = None,
             layer_preview_quality: int = None,
@@ -68,23 +67,15 @@ class ECOSTRESSTiledGranule(ECOSTRESSGranule):
             **kwargs
         )
 
-        if product_name is None:
-            product_name = self._PRODUCT_NAME
-
-        if product_name is None:
-            raise ValueError("product name not given for ECOSTRESS tiled product")
-
         if product_location is None:
             if isinstance(time_UTC, str):
                 time_UTC = parser.parse(time_UTC)
 
             granule_name = self.generate_granule_name(
-                product_name=product_name,
                 orbit=orbit,
                 scene=scene,
                 tile=tile,
                 time_UTC=time_UTC,
-                build=build,
                 process_count=process_count
             )
 
@@ -189,14 +180,13 @@ class ECOSTRESSTiledGranule(ECOSTRESSGranule):
     @classmethod
     def generate_granule_name(
             cls,
-            product_name: str,
             orbit: int,
             scene: int,
             tile: str,
             time_UTC: Union[datetime, str],
-            build: str,
             process_count: int,
             collection: str = "003"):
+        product_name = cls._PRODUCT_NAME
         if product_name is None:
             raise ValueError("invalid product name")
 
@@ -212,16 +202,13 @@ class ECOSTRESSTiledGranule(ECOSTRESSGranule):
         if time_UTC is None:
             raise ValueError("invalid time")
 
-        if build is None:
-            raise ValueError("invalid build")
-
         if process_count is None:
             raise ValueError("invalid process count")
 
         if isinstance(time_UTC, str):
             time_UTC = parser.parse(time_UTC)
 
-        granule_name = f"ECOv{collection}_{product_name}_{orbit:05d}_{scene:03d}_{tile}_{time_UTC:%Y%m%dT%H%M%S}_{build}_{process_count:02d}"
+        granule_name = f"ECOv{collection}_{product_name}_{orbit:05d}_{scene:03d}_{tile}_{time_UTC:%Y%m%dT%H%M%S}_{process_count:02d}"
 
         return granule_name
 
@@ -417,28 +404,28 @@ class ECOSTRESSTiledGranule(ECOSTRESSGranule):
         if self._orbit is not None:
             return self._orbit
         else:
-            return int(self.granule_name.split('_')[-6])
+            return int(self.granule_name.split('_')[-5])
 
     @property
     def scene(self) -> int:
         if self._scene is not None:
             return self._scene
         else:
-            return int(self.granule_name.split('_')[-5])
+            return int(self.granule_name.split('_')[-4])
 
     @property
     def tile(self) -> str:
         if self._tile is not None:
             return self._tile
         else:
-            return self.granule_name.split('_')[-4]
+            return self.granule_name.split('_')[-3]
 
     @property
     def time_UTC(self) -> datetime:
         if self._time_UTC is not None:
             return self._time_UTC
         else:
-            return parser.parse(self.granule_name.split('_')[-3])
+            return parser.parse(self.granule_name.split('_')[-2])
 
     def UTC_to_solar(self, time_UTC: datetime, lon: float) -> datetime:
         return time_UTC + timedelta(hours=(np.radians(lon) / np.pi * 12))
@@ -459,7 +446,7 @@ class ECOSTRESSTiledGranule(ECOSTRESSGranule):
         if self._build is not None:
             return self._build
         else:
-            return self.granule_name.split('_')[-2]
+            return self.standard_metadata["BuildID"]
 
     @property
     def process_count(self) -> int:
@@ -470,7 +457,7 @@ class ECOSTRESSTiledGranule(ECOSTRESSGranule):
 
     @property
     def product(self) -> str:
-        return "_".join(self.granule_name.split("_")[1:-6])
+        return "_".join(self.granule_name.split("_")[1:-5])
 
     @property
     def granule_name(self) -> str:
@@ -483,7 +470,6 @@ class ECOSTRESSTiledGranule(ECOSTRESSGranule):
                 scene=self.scene,
                 tile=self.tile,
                 time_UTC=self.time_UTC,
-                build=self.build,
                 process_count=self.process_count
             )
 

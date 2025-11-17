@@ -13,8 +13,12 @@ PREVIEW_CMAP = NDVI_COLORMAP
 VARIABLE_CMAPS = {
     "NDVI": NDVI_COLORMAP,
     "NDVI-UQ": "jet",
+    "NDVI-bias": "viridis",
+    "NDVI-bias-UQ": "viridis",
     "albedo": ALBEDO_COLORMAP,
-    "albedo-UQ": "jet"
+    "albedo-UQ": "jet",
+    "albedo-bias": "viridis",
+    "albedo-bias-UQ": "viridis",
 }
 
 class L2STARSGranule(ECOSTRESSGranule):
@@ -29,8 +33,12 @@ class L2STARSGranule(ECOSTRESSGranule):
 
         self._NDVI = None
         self._NDVI_UQ = None
+        self._NDVI_bias = None
+        self._NDVI_bias_UQ = None
         self._albedo = None
         self._albedo_UQ = None
+        self._albedo_bias = None
+        self._albedo_bias_UQ = None
 
     @property
     def NDVI(self):
@@ -48,6 +56,20 @@ class L2STARSGranule(ECOSTRESSGranule):
         return self._NDVI_UQ
 
     @property
+    def NDVI_bias(self):
+        if self._NDVI_bias is None:
+            self._NDVI_bias = self.variable("NDVI-bias")
+
+        return self._NDVI_bias
+
+    @property
+    def NDVI_bias_UQ(self):
+        if self._NDVI_bias_UQ is None:
+            self._NDVI_bias_UQ = self.variable("NDVI-bias-UQ")
+
+        return self._NDVI_bias_UQ
+
+    @property
     def albedo(self):
         if self._albedo is None:
             self._albedo = self.variable("albedo")
@@ -61,6 +83,20 @@ class L2STARSGranule(ECOSTRESSGranule):
             self._albedo_UQ = self.variable("albedo-UQ")
 
         return self._albedo_UQ
+
+    @property
+    def albedo_bias(self):
+        if self._albedo_bias is None:
+            self._albedo_bias = self.variable("albedo-bias")
+
+        return self._albedo_bias
+
+    @property
+    def albedo_bias_UQ(self):
+        if self._albedo_bias_UQ is None:
+            self._albedo_bias_UQ = self.variable("albedo-bias-UQ")
+
+        return self._albedo_bias_UQ
 
     @property
     def orbit(self):
@@ -113,13 +149,13 @@ class L2TSTARS(ECOSTRESSTiledGranule, L2STARSGranule):
     @classmethod
     def generate_granule_name(
             cls,
-            product_name: str,
             orbit: int,
             scene: int,
             tile: str,
             time_UTC: Union[datetime, str],
-            build: str,
-            process_count: int):
+            process_count: int,
+            collection = "003"):
+        product_name = cls._PRODUCT_NAME
         if product_name is None:
             raise ValueError("invalid product name")
 
@@ -135,15 +171,12 @@ class L2TSTARS(ECOSTRESSTiledGranule, L2STARSGranule):
         if time_UTC is None:
             raise ValueError("invalid time")
 
-        if build is None:
-            raise ValueError("invalid build")
-
         if process_count is None:
             raise ValueError("invalid process count")
 
         if isinstance(time_UTC, str):
             time_UTC = parser.parse(time_UTC)
 
-        granule_name = f"ECOv003_{product_name}_{tile}_{time_UTC:%Y%m%dT%H%M%S}_{build}_{process_count:02d}"
+        granule_name = f"ECOv{collection}_{product_name}_{tile}_{time_UTC:%Y%m%d}_{process_count:02d}"
 
         return granule_name

@@ -58,6 +58,7 @@ def write_L4T_WUE(
 
     percent_good_quality = 100 * (1 - np.count_nonzero(np.isnan(WUE)) / WUE.size)
     metadata["ProductMetadata"]["QAPercentGoodQuality"] = percent_good_quality
+    metadata["StandardMetadata"]["BuildID"] = build
     metadata["StandardMetadata"]["LocalGranuleID"] = basename(L4T_WUE_zip_filename)
 
     short_name = L4T_WUE_SHORT_NAME
