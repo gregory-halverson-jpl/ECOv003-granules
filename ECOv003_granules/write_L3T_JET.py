@@ -113,6 +113,7 @@ def write_L3T_JET(
 
         L3T_JET_granule.add_layer("PTJPLSMinst", LE_instantaneous_PTJPLSM_Wm2, cmap=ET_COLORMAP)
         L3T_JET_granule.add_layer("PTJPLSMdaily", ET_daylight_PTJPLSM_kg, cmap=ET_COLORMAP)
+        L3T_JET_granule.add_layer("STICJPLinst", LE_instantaneous_STICJPL_Wm2, cmap=ET_COLORMAP)
         L3T_JET_granule.add_layer("STICJPLdaily", ET_daylight_STICJPL_kg, cmap=ET_COLORMAP)
         L3T_JET_granule.add_layer("BESSJPLdaily", ET_daylight_BESSJPL_kg, cmap=ET_COLORMAP)
         L3T_JET_granule.add_layer("PMJPLdaily", ET_daylight_PMJPL_kg, cmap=ET_COLORMAP)
