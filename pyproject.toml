@@ -16,6 +16,7 @@ classifiers = [
 ]
 dependencies = [
     "colored-logging",
+    "ECOv002-granules",
     "matplotlib",
     "numpy",
     "rasters",
