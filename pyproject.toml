@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ECOv003-granules"
-version = "1.12.0"
+version = "1.13.0"
 description = "ECOSTRESS Collection 3 Data Product Granule Encapsulation Classes"
 readme = "README.md"
 authors = [
@@ -16,6 +16,7 @@ classifiers = [
 ]
 dependencies = [
     "colored-logging",
+    "ECOv002-granules",
     "matplotlib",
     "numpy",
     "rasters",
